@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Travel Planning</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='index.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <a href="/" class="logo">Travel Planner</a>
+            <nav class="nav">
+                {% if session['role'] == 'user' or session['role'] == 'admin' %}
+                    <a class="nav-link" href="/home">Home</a>
+                    <a class="nav-link" href="/destinations">Destinations</a>
+                    <a class="nav-link" href="/profile">Profile</a>
+                    <a class="nav-link" href="/signout">Signout</a>
+                {% else %}
+                    <a href="/" class="nav-link">Home</a>
+                    <a class="nav-link" href="/destinations">Destinations</a>
+                    <a href="/signin" class="nav-link">Sign In</a>
+                    <a href="/signup" class="nav-link">Sign Up</a>
+                {% endif %}
+            </nav>
+        </div>
+    </header>
+    <main class="hero">
+        <div class="container">
+            <h1 class="hero-title">Welcome to Travel Planner</h1>
+            <p class="hero-subtitle">Discover your next adventure. Plan your perfect trip today!</p>
+            <form method="post" action="/" class="search-form" onsubmit="return validateForm()">
+                <div class="input-wrapper">
+                    <input type="text" name="search" placeholder="Search for destinations, activities, and more..." id="search-input" required />
+                    <button type="button" class="clear-btn" id="clear-btn">&times;</button>
+                </div>
+                <button type="submit" class="search-btn">Search</button>
+            </form>
+        </div>
+    </main>
+    <script>
+        document.getElementById('clear-btn').addEventListener('click', function() {
+            document.getElementById('search-input').value = '';
+        });
+
+        function validateForm() {
+            var searchInput = document.getElementById('search-input').value;
+            if (searchInput.trim() === "") {
+                alert("Please enter a search term.");
+                return false;
+            }
+            return true;
+        }
+    </script>
+    <footer>
+        © 2024 Travel Planner - All Rights Reserved
+    </footer>
+</body>
+</html>
