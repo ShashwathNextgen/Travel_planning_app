@@ -19,15 +19,15 @@ from db import Places
 app = Flask(__name__, static_url_path='/static')
 
 # Set the secret key
-app.secret_key = 'Suresh@1234'
+app.secret_key = 'give_any_secret_key'
 
 
 
 # Database connection parameters
 db_host = "localhost"
-db_database = "travel_planning"
-db_user = "user"
-db_password = "5001"
+db_database = "db_name"
+db_user = "user_name"
+db_password = "user_password"
 
 
 @app.route('/', methods=['GET', 'POST'])
