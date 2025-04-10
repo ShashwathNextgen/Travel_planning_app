@@ -1,0 +1,11 @@
+Flask
+Flask-SocketIO
+stripe
+twilio
+logging
+functools
+datetime
+requests
+psycopg2
+werkzeug
+
