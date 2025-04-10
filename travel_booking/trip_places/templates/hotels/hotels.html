@@ -7,19 +7,18 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='index.css') }}">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
 </head>
+<body>
     <header class="header">
         <div class="container">
             <a href="/" class="logo">Travel Planner</a>
             <nav class="nav">
                 {% if session['role'] == 'user' or session['role'] == 'admin' %}
-                    <a class="nav-link" href="/">Home</a>
+                    <a class="nav-link" href="/home">Home</a>
                     <a class="nav-link" href="/destinations">Destinations</a>
-                    <a class="nav-link" href="/hotels_display">Hotels</a>
+                    <a href="/hotels_display" class="nav-link">Hotels</a>
                     <a class="nav-link" href="/cart">My Cart</a>
                     <a class="nav-link" href="/profile">Profile</a>
                     <a class="nav-link signout" href="/signout">Signout</a>
-
-
                 {% else %}
                     <a href="/" class="nav-link">Home</a>
                     <a href="/destinations" class="nav-link">Destinations</a>
@@ -31,11 +30,11 @@
         </div>
     </header>
 
-    <!-- Search bar section (moved above) -->
+    <!-- Search bar section at the top -->
     <main class="hero">
         <div class="container">
-            <h1 class="hero-title">Where to?</h1>
-            <form method="post" action="/" class="search-form" onsubmit="return validateForm()">
+            <h1 class="hero-title">Find Your Perfect Stay</h1>
+            <form method="post" action="/hotel_search" class="search-form" onsubmit="return validateForm()">
                 <div class="input-wrapper">
                     <input type="text" name="search" placeholder="Places to go, things to do, hotels..." id="search-input" required />
                     <button type="submit" class="search-btn">Search</button>
@@ -48,19 +47,20 @@
         </div>
     </main>
 
-    <!-- Places section -->
+    <!-- Hotel Display Section -->
     <section class="places-section">
         <div class="container">
-            <h2>Dream Your Next Trip</h2>
-            <p>Weekend getaways from India</p>
+            <h2>Stay somewhere great</h2>
             <div class="places-container">
-                {% for place in places %}
+                {% for hotel in hotels %}
                 <div class="place-card">
-                    <img src="{{ url_for('static', filename='images/travel.jpg') }}" alt="{{ place.name }}">
-                    <h3>{{ place.name }}</h3>
-                    <p>{{ place.location }}</p>
+                    <img src="{{ url_for('static', filename='images/travel.jpg') }}" alt="{{ hotel.name }}">
+                    <h3>{{ hotel.name }}</h3>
+                    <p>{{ hotel.location }}</p>
+                    <p>{{ hotel.price_per_night }} per night</p>
                 </div>
                 {% endfor %}
+
             </div>
         </div>
     </section>
@@ -87,5 +87,4 @@
         }
     </script>
 </body>
-
 </html>
