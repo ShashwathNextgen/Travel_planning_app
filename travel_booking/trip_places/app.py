@@ -616,7 +616,6 @@ def remove_from_cart(cart_id):
         return redirect(url_for('signin'))
 
 
-
 def send_message(text):
     account_sid = "your sid"
 
